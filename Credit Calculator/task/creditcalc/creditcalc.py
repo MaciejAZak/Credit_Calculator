@@ -19,7 +19,7 @@ if to_count == "m":
         print("{0} months".format(months))
 elif to_count == "p":
     periods = int(input("Please enter amount of periods:"))
-    monthly_payment = round((credit_principal / periods) + 0.5, 0)
+    monthly_payment = round((credit_principal / periods) +0.5, 0)
     last_payment = credit_principal - (periods - 1) * monthly_payment
     print("Your monthly payment = {0} with last payment = {1}".format(monthly_payment,last_payment))
 else:
