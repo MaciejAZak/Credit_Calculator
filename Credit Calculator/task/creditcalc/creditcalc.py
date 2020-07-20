@@ -1,27 +1,64 @@
-credit_principal = 'Credit principal: 1000'
-final_output = 'The credit has been repaid!'
-first_month = 'Month 1: paid out 250'
-second_month = 'Month 2: paid out 250'
-third_month = 'Month 3: paid out 500'
+import math
 
-# write your code here
-print("What's your credit principal")
-credit_principal = int(input())
-print("Periods (m) or Monthly Payment? (p)")
+print("What do you want to calculate? months (n), annuity payment (a) or credit principal? (p)")
 to_count = input("")
 
-if to_count == "m":
+if to_count == "n":
+
+    principal = int(input("Please enter your credit principal:"))
     payment = int(input("Please enter your monthly payment:"))
-    months = round(credit_principal / payment)
-    if months == 1:
-        print("{0} month".format(months))
+    interest = float(input("Please enter your credit interest in %:"))
+
+    i = (interest / 100) / 12
+    n = math.ceil(math.log((payment / (payment - i * principal)), 1 + i))
+    years = n // 12
+    months = n % 12
+    if years != 0:
+        if years == 1:
+            if months == 1:
+                print(f'You need {years} year and {months} month to repay this credit!')
+            elif months == 0:
+                print(f'You need {years} year to repay this credit!')
+            else:
+                print(f'You need {years} year and {months} months to repay this credit!')
+        else:
+            if months == 1:
+                print(f'You need {years} years and {months} month to repay this credit!')
+            elif months == 0:
+                print(f'You need {years} years to repay this credit!')
+            else:
+                print(f'You need {years} years and {months} months to repay this credit!')
     else:
-        print("{0} months".format(months))
+        if months == 1:
+            print(f'You need {months} month to repay this credit!')
+        elif months == 0:
+            print(f'You\'re clear!')
+        else:
+            print(f'You need {months} months to repay this credit!')
+
+
+elif to_count == "a":
+
+    principal = int(input("Please enter your credit principal:"))
+    period = int(input("Please enter duration of your credit in months:"))
+    interest = float(input("Please enter your credit interest in %:"))
+    i = (interest / 100) / 12
+
+    payment = math.ceil(principal * ((i * math.pow((1 + i) , period) / (math.pow((1 + i) , period) - 1))))
+
+    print(f'Your annuity payment = {payment}!')
+
 elif to_count == "p":
-    periods = int(input("Please enter amount of periods:"))
-    monthly_payment = round((credit_principal / periods) +0.5, 0)
-    last_payment = credit_principal - (periods - 1) * monthly_payment
-    print("Your monthly payment = {0} with last payment = {1}".format(monthly_payment,last_payment))
+
+    payment = float(input("Please enter your monthly payment:"))
+    period = int(input("Please enter duration of your credit in months:"))
+    interest = float(input("Please enter your credit interest in %:"))
+    i = (interest / 100) / 12
+
+    principal = (int) (payment / ((i * math.pow((1 + i) , period)) / (math.pow((1 + i) , period) - 1)))
+
+    print(f'Your credit principal = {principal}!')
+
 else:
     print("unknown command")
 
