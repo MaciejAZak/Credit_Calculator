@@ -44,8 +44,7 @@ elif to_count == "a":
     interest = float(input("Please enter your credit interest in %:"))
     i = (interest / 100) / 12
 
-    payment = math.ceil(principal * ((i * math.pow((1 + i) , period) / (math.pow((1
-                                                                                  + i) , period) - 1))))
+    payment = math.ceil(principal * ((i * math.pow((1 + i) , period) / (math.pow((1 + i) , period) - 1))))
 
     print(f'Your annuity payment = {payment}!')
 
